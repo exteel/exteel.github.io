@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Modak&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- FAVICONS-->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../../assets/img/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../assets/img/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="../../assets/img/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="../../assets/img/favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    
+    <!--  Slick -->
+    <link
+      type="text/scss"
+      rel="stylesheet"
+      href="../../../node_modules/slick-carousel/slick/slick.scss"
+    />
+    <link
+      type="text/scss"
+      rel="stylesheet"
+      href="../../../node_modules/slick-carousel/slick/slick-theme.scss"
+    />
+    
+    <!-- Useful meta tags -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow, noodp" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="google" content="notranslate" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>HomePage</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    
+    <!--  
+    
+     <script type="text/javascript">
+       $('.sliderrr-for').slick({
+       slidesToShow: 1,
+       slidesToScroll: 1,
+       arrows: true,
+       dots: true,
+       fade: true,
+     });
+    
+    </script> -->
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header__inner">
+        <div class="row">
+          <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4">
+            <div class="logo">
+              <a class="glitch" data-text="BOUNCY" href="#first__screen">bouncy</a>
+            </div>
+          </div>
+    
+          <div class="col-xl-10 col-lg-10 col-md-9 col-sm-8">
+            <nav class="nav">
+              <ul class="nav__list">
+                <li><a class="nav__item" href="#hello">Hello</a></li>
+                <li><a class="nav__item" href="#about">About</a></li>
+                <li><a class="nav__item" href="#services">Services</a></li>
+                <li><a class="nav__item" href="#portfolio">Portfolio</a></li>
+                <li><a class="nav__item" href="#team">Team</a></li>
+                <li><a class="nav__item" href="#blog">Blog</a></li>
+                <li><a class="nav__item" href="#contact">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <script>
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+          $(".header").addClass("fixed");
+        } else {
+          $(".header").removeClass("fixed");
+        }
+      });
+    </script>
+
+    <!-- 1 Screen -->
+    <div class="first__screen" id="first__screen">
+      <div class="slider" id="main-slider">
+          
+        <div class="slider-wrapper">
+          <img
+            src="../../assets/img/slider/slider1.jpg"
+            alt="First"
+            class="slide"
+          />
+          <img
+            src="../../assets/img/slider/slider2.jpg"
+            alt="Second"
+            class="slide"
+          />
+          <img
+            src="../../assets/img/slider/slider3.jpg"
+            alt="Third"
+            class="slide"
+          />
+        </div>
+    
+        <div class="infobox">
+          <div class="info__title">We Are Code Cafe</div>
+          <div class="info__description">
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui
+            blanditiis praesentium voluptatum
+          </div>
+        </div>
+    
+        <div class="arrow--down">
+                <a class="arrow-wave" href="#hello">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </a>
+        </div>
+    </div>
+    </div>
+    
+    
+    <script>
+      (function() {
+        function Slideshow(element) {
+          this.el = document.querySelector(element);
+          this.init();
+        }
+    
+        Slideshow.prototype = {
+          init: function() {
+            this.wrapper = this.el.querySelector(".slider-wrapper");
+            this.slides = this.el.querySelectorAll(".slide");
+            this.previous = this.el.querySelector(".slider-previous");
+            this.next = this.el.querySelector(".slider-next");
+            this.index = 0;
+            this.total = this.slides.length;
+            this.timer = null;
+    
+            this.action();
+            this.stopStart();
+          },
+          _slideTo: function(slide) {
+            var currentSlide = this.slides[slide];
+            currentSlide.style.opacity = 1;
+    
+            for (var i = 0; i < this.slides.length; i++) {
+              var slide = this.slides[i];
+              if (slide !== currentSlide) {
+                slide.style.opacity = 0;
+              }
+            }
+          },
+          action: function() {
+            var self = this;
+            self.timer = setInterval(function() {
+              self.index++;
+              if (self.index == self.slides.length) {
+                self.index = 0;
+              }
+              self._slideTo(self.index);
+            }, 3000);
+          },
+          stopStart: function() {
+            var self = this;
+            self.el.addEventListener(
+              "mouseover",
+              function() {
+                clearInterval(self.timer);
+                self.timer = null;
+              },
+              false
+            );
+            self.el.addEventListener(
+              "mouseout",
+              function() {
+                self.action();
+              },
+              false
+            );
+          }
+        };
+    
+        document.addEventListener("DOMContentLoaded", function() {
+          var slider = new Slideshow("#main-slider");
+        });
+      })();
+    </script>
+
+    <!-- 2 Screen -->
+    
+      <div class="second" id="hello">
+        <div class="grid-flex">
+          
+          <div class="col col-text col-left col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+            <div class="Aligner-item">
+              <div class="about__title">This is Bouncy</div>
+    
+              <div class="about__description">
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                blanditiis praesentium voluptatum deleniti atque corrupti quos
+                dolores et quas molestias excepturi sint occaecati cupiditate non
+                provident, similique sunt in culpa qui officia deserunt mollitia
+                animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis
+                est et expedita distinctio.
+              </div>
+    
+              <div class="btn about--btn">
+                <a class="btn--link" href="index.html">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col col-image col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+            <img src="../../assets/img/ipad.png" alt="s" />
+            <div class="shadow__ipad"></div>
+          </div>
+        </div>
+      </div>
+
+    <!-- 3 Screen -->
+    <div class="about" id="about">
+      <div class="about__details about--centered">
+        <div class="about__title about__details__title">details about bouncy</div>
+    
+        <div class="about__description about__details__description ab__descr">
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui
+          <br />
+          blanditiis praesentium
+        </div>
+    
+        <div class="about--icons">
+          <div class="icon heart">
+            <img src="../../assets/img/icons/heart.svg" alt="" />
+          </div>
+          <div class="icon mouse">
+            <img src="../../assets/img/icons/mouse.svg" alt="" />
+          </div>
+          <div class="icon light">
+            <img src="../../assets/img/icons/light-bulb.svg" alt="" />
+          </div>
+        </div>
+    
+        <div class="about__infobox">
+          <div class="about__part">
+            <div class="about__subtitle">Creative Ideas</div>
+    
+            <div class="about__description">
+              At <span class="span--green">vero</span> eos et accusamus et iusto
+              odio dignissimos <span class="span--bold">ducimus</span> qui
+              blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+            </div>
+          </div>
+    
+          <div class="about__part">
+            <div class="about__description">
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque
+              <span class="span--bold">corrupti quos</span> dolores et quas
+              molestias <span class="span--green">excepturi</span> sint occaecati
+              cupiditate non provident,
+              <span class="span--bold">similique</span> sunt in culpa qui officia
+              deserunt mollitia animi, id est laborum et dolorum fuga
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Screen -->
+    <div class="our__services" id="services">
+      <div class="about--centered">
+        <div class="about__title">our services</div>
+    
+        <div class="about__description our__decription">
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui
+          <br />
+          blanditiis praesentium
+        </div>
+      </div>
+    </div>
+    
+    <div class="about__infobox">
+      <div class="our__services--main">
+        <div class="about--icons services--icons left--ic">
+          <div class="icon support">
+            <img src="../../assets/img/icons/customer-support.svg" alt="" />
+          </div>
+          <div class="icon mouse">
+            <img src="../../assets/img/icons/roller.svg" alt="" />
+          </div>
+          <div class="icon light">
+            <img src="../../assets/img/icons/console.svg" alt="" />
+          </div>
+          <div class="icon light">
+            <img src="../../assets/img/icons/plug.svg" alt="" />
+          </div>
+        </div>
+        <div class="about__part about__part__services">
+          <div class="about__subtitle">Graphic Design</div>
+    
+          <div class="about__description">
+            At vero eos et accusamus et <span class="span--green"> vero </span> odio dignissimos <span class="span--bold">ducimus</span> qui blanditiis praesentium voluptatum deleniti
+          </div>
+    
+          <div class="about__description about__description--sm">
+            At <span class="span--green">vero</span> eos et accusamus et iusto odio
+            dignissimos<span class="span--bold">ducimus</span>qui blanditiis
+            praesentium voluptatum deleniti atque corrupti quos doloresqui
+            blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+          </div>
+        </div>
+    
+        <div class="about__part">
+          <div class="rt-container">
+            <div class="radialProgressBar progress-80">
+              <div class="overlay">80% <br> Branding</div>
+              <div class="progress__text"></div>
+              <div class="progress__text2"></div>
+    
+            </div>
+    
+            <div class="radialProgressBar progress-75">
+              <div class="overlay">75% <br> Web Design</div>
+              <div class="progress__text"></div>
+            </div>
+    
+            <div class="radialProgressBar progress-60">
+              <div class="overlay">60% <br> UI/UX</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Screen -->
+    <div class="team__quotes" >
+        <div class="team__about">
+        <h2 class="team__title">Impressed ?</h2>
+        <p class="team__description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias</p>
+        <p class="author">Abdullah Noman</p>
+        <p class="position">Creatice Director, <span class="green">Code Cafe</span> </p>
+        </div>
+        
+        <div class="imac">
+          <img src="../../assets/img/imac.png" alt="s" />
+        </div>
+        
+      </div>
+    <!-- 6 Screen -->
+    <div class="portfolio__block" id="portfolio">
+      <div class="our__services">
+        <div class="about--centered about--centered--gray">
+          <div class="about__title">the portfolio</div>
+    
+          <div class="about__description our__decription">
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui
+            <br />
+            blanditiis praesentium
+          </div>
+        </div>
+      </div>
+    
+      
+        <div class="portfolio__nav">
+          <ul class="portfolio__list">
+            <li class="portfolio__list--item"><a href="#">All Works</a></li>
+            <li class="portfolio__list--item"><a href="#">Print</a></li>
+            <li class="portfolio__list--item"><a href="#">Identity</a></li>
+            <li class="portfolio__list--item"><a href="#">Branding</a></li>
+            <li class="portfolio__list--item"><a href="#">Web</a></li>
+            <li class="portfolio__list--item"><a href="#">HTML</a></li>
+            <li class="portfolio__list--item"><a href="#">Wordpress</a></li>
+          </ul>
+        </div>
+    
+      <div class="portfolio__grid">
+        <div class="main__content">
+          <div class="portfolio">
+            <div class="portfolio--item portfolio--item--first">
+              <img class="image" src="../../assets/img/portfolio/one.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--second">
+              <img class="image" src="../../assets/img/portfolio/two.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--third">
+              <img class="image" src="../../assets/img/portfolio/three.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--fourth">
+              <img class="image" src="../../assets/img/portfolio/four.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--fifth">
+              <img class="image" src="../../assets/img/portfolio/five.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--sixth">
+              <img class="image" src="../../assets/img/portfolio/six.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--seventh">
+              <img class="image" src="../../assets/img/portfolio/seven.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--eight">
+              <img class="image" src="../../assets/img/portfolio/eight.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--nineth">
+              <img class="image" src="../../assets/img/portfolio/nine.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--tenth">
+              <img class="image" src="../../assets/img/portfolio/ten.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--eleventh">
+              <img class="image" src="../../assets/img/portfolio/eleven.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+    
+            <div class="portfolio--item portfolio--item--twelfth">
+              <img class="image" src="../../assets/img/portfolio/twelve.jpg" alt="portfolio-img" />
+              <a class="overlay2" href="#" target="_blank">
+                <div class="text2">
+                  <p class="title2">title here</p>
+                  <div class="divider2"></div>
+                  <p class="sub-title2">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus 
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <section class="green--block">
+        <div class="green--block--content">
+          <h2>
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui
+            blanditiis
+          </h2>
+          <div class="btn btn--white">Start Project</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 7 Screen -->
+    
+    
+      <div class="team__slider" id="team">
+        <div class="our__services">
+            <div class="about--centered">
+              <div class="about__title">the team</div>
+          
+              <div class="about__description our__decription">
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                <br />
+                blanditiis praesentium
+              </div>
+            </div>
+          </div>
+    
+          <div class="tripple-slider">
+              <div class="img--slider col-lg-4 col-md-6 col-sm-12 col-12">
+                  <img src="../../assets/img/team1.jpg" alt="team">
+              </div>
+    
+              <div class="info--slider col-lg-4 col-md-6 col-sm-12 col-12">
+                <div class="name--slider"> 
+                  <div class="title--slider">Abdullah Noman</div>
+                  <div class="sub-title--slider">Creative Director, Code Cafe</div>
+                  </div>
+                  <div class="description--slider">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</div>
+                  <div class="progress--slider">
+    
+                    <ul class="skills-bar-container">
+      
+                        <li>
+                          <div class="progressbar-title">
+                            <h3>BRANDING</h3>
+                            <span class="percent" id="html-pourcent">80%</span>
+                          </div>
+                          <div class="bar-container">
+                            <span class="progressbar progressgreen" id="progress-html"></span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="progressbar-title">
+                            <h3>WEB DESIGN</h3>
+                            <span class="percent" id="css-pourcent">65%</span>
+                          </div>
+                          <div class="bar-container">
+                            <span class="progressbar progressgreen" id="progress-css"></span>
+                          </div>
+                        </li>
+                        
+                        <li>
+                          <div class="progressbar-title">
+                            <h3>USER INTERFACE</h3>
+                            <span class="percent" id="javascript-pourcent">75%</span>
+                          </div>
+                          <div class="bar-container">
+                            <span class="progressbar progressgreen" id="progress-javascript"></span>
+                          </div>
+                        </li>
+                        
+                        
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+    
+      <section class="black--block">
+    
+            <div class="black--block--content">
+              <h2>Already Loved Us? Let’s talk!</h2>
+              <div class="btn btn--white">Contact Us</div>
+            </div>
+            </section>
+    
+    
+            
+    <!-- 8 Screen -->
+    <div class="team_sta">
+    
+      <div class="our__services">
+              <div class="about--centered">
+                <div class="about__title">testimonials</div>
+            
+                <div class="about__description our__decription">
+                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                  <br />
+                  blanditiis praesentium
+                </div>
+              </div>
+      </div>
+      
+          <div class="team_sta--slider">
+              <div class="team--img"><img src="../../assets/img/team__testimonials/PARTHO.png" alt=""></div>
+              <div class="team--description">
+                <div class="team--description--main">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia.
+                </div>
+                
+                <div class="team--description--name">partho</div>
+                <div class="team--description--position">FOUNDER, ARTWAYS BD</div>
+            </div>
+          </div>
+      
+      </div>
+    <!-- 9 Screen -->
+    
+    <section class="blog" id="blog">
+    
+    
+        <div class="blog__about">
+            <h2 class="blog__title">lattest news</h2>
+            <p class="blog__description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</p>
+        </div>
+        
+        
+        <div class="blog__info">
+            <h3>The trending Landing Pages</h3>
+            <p class="position">by <span class="green green__cursive">kabir uddin</span>
+            </p>
+            <div class="blog__info__social">
+              <ul class="blog__info__social__list">
+              <li>6950 Likes</li>
+              <li>– 243 Comments</li>
+              <li>– 703 shares</li>
+                </ul>
+             </div>
+          <div class="blog__info__description">
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio...  
+          </div>
+          
+          <a class="blog__info__readMore" href="#">+ Read More</a>
+        </div>
+        
+        </section>
+        
+    <!-- 10 Screen-->
+    <div class="our__price">
+    
+        <div class="our__services">
+            <div class="about--centered">
+              <div class="about__title">our price</div>
+          
+              <div class="about__description our__decription">
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                <br />
+                blanditiis praesentium
+              </div>
+            </div>
+          </div>
+    
+    
+          <div class="price__cards">
+            <div class="price__card">
+                <div class="price__card__title price__card__premium"></div>
+                <div class="price__card__information">
+                        <div class="price__card__list">
+                                <ul>
+                                    <li>Full Branding</li>
+                                    <li>Project Management</li>
+                                    <li>Unlimited Revisions</li>
+                                    <li>24/7 h Service</li>
+                                    <li>Free Domain</li>
+                                    <li>Free Hosting</li>
+                                </ul>
+                            </div>
+                <div class="price__card__amount">$ 60</div>
+                <div class="price__card__time">Per Mounth</div>
+            </div>
+            </div>
+            <div class="price__card">
+                <div class="price__card__title price__card__standart"></div>
+                <div class="price__card__information">
+                <div class="price__card__list">
+                    <ul>
+                        <li>Full Branding</li>
+                        <li>Project Management</li>
+                        <li>Unlimited Revisions</li>
+                        <li>24/7 h Service</li>
+                        <li>Free Domain</li>
+                        <li>Free Hosting</li>
+                    </ul>
+                </div>
+                <div class="price__card__amount">$ 70</div>
+                <div class="price__card__time">Per Mounth</div>
+            </div>
+            </div>
+            <div class="price__card">
+                <div class="price__card__title price__card__exclusive"></div>
+                <div class="price__card__information">
+                        <div class="price__card__list">
+                                <ul>
+                                    <li>Full Branding</li>
+                                    <li>Project Management</li>
+                                    <li>Unlimited Revisions</li>
+                                    <li>24/7 h Service</li>
+                                    <li>Free Domain</li>
+                                    <li>Free Hosting</li>
+                                </ul>
+                            </div>
+                <div class="price__card__amount">$ 80</div>
+                <div class="price__card__time">Per Mounth</div>
+            </div>
+            </div>
+    </div>
+    </div>
+    <!-- 11 Screen-->
+    <div class="subscribe__us" >
+    
+        <div class="our__services">
+            <div class="about--centered">
+              <div class="about__title">subscribe us</div>
+          
+              <div class="about__description our__decription">
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                <br />
+                blanditiis praesentium
+              </div>
+            </div>
+          </div>
+    
+          <div class="subscribe__form">
+          <input type="email" placeholder="Email Adress">
+            <div class="green--btn">submit</div>
+        </div>
+    
+    </div>
+    <!-- 12 Screen-->
+    <div class="contact__us" id="contact">
+      <div class="our__services">
+        <div class="about--centered">
+          <div class="about__title">contact us</div>
+    
+          <div class="about__description our__decription">
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui
+            <br />
+            blanditiis praesentium
+          </div>
+        </div>
+      </div>
+    
+      <div class="contact__us__items">
+        <div class="contact__us__item">
+          <div class="contact__us__background contact__us__background--first">
+            <img src="../../assets/img/icons/email.svg" alt="" />
+          </div>
+          <div class="contact__us__info">
+            <div class="contact__us__title">email</div>
+            <div class="contact__us__description">
+              <p>hello@codecafe.com</p>
+              <p>Personal@codecafe.com</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="contact__us__item">
+          <div class="contact__us__background contact__us__background--second">
+            <img src="../../assets/img/icons/location.svg" alt="" />
+          </div>
+          <div class="contact__us__info">
+            <div class="contact__us__title">our office</div>
+            <div class="contact__us__description">
+              <p>240 Bhatikhana, 8200 Barisal</p>
+              <p>Bangladesh</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="contact__us__item">
+          <div class="contact__us__background contact__us__background--third">
+            <img src="../../assets/img/icons/phone-call.svg" alt="" />
+          </div>
+          <div class="contact__us__info">
+            <div class="contact__us__title">phone</div>
+            <div class="contact__us__description">
+              <p>+00 11 66 99 66 44</p>
+              <p>11 99 66 44 065</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 Screen-->
+    
+    <div class="form--section">
+    <form class="contact__form">
+        <div class="contact__form__item contact__form__item--name"><input placeholder="Your Name" type="text"></div>
+        <div class="contact__form__item contact__form__item--mail"><input placeholder="Email Adress" type="email"></div>
+        <div class="contact__form__item contact__form__item--subject"><input placeholder="Subject" type="text"></div>
+        <div class="contact__form__item contact__form__item--main"><textarea class="textarea"  name="text" id="textarea" cols="80" rows="12"></textarea></div>
+        <div class="contact__form__item contact__form__item--button">submit now</div>
+    </form>
+    
+    </div>
+    <!-- 14 Screen-->
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5197.4419934518255!2d-73.99175465873452!3d40.7487731057471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a21fb011c85%3A0x33df10e49762f8e4!2z0JzRjdC00LjRgdC-0L0t0YHQutCy0LXRgC3Qs9Cw0YDQtNC10L0!5e0!3m2!1sru!2sua!4v1572541112597!5m2!1sru!2sua" style="border:0;" allowfullscreen=""></iframe>
+    </div>
+    <!-- 15 Screen-->
+    <footer class="footer">
+        <div class="footer__main">
+        <div class="company__name">bouncy</div>
+        <div class="company__description">Copyright 2019. All rights Reserved</div>
+        <div class="company__social">
+                <img src="../../assets/img/icons/facebook.svg" alt="" />
+                <img src="../../assets/img/icons/twitter.svg" alt="" />
+                <img src="../../assets/img/icons/linkedin.svg" alt="" />
+                <img src="../../assets/img/icons/instagram.svg" alt="" />
+                <img src="../../assets/img/icons/vimeo.svg" alt="" />
+        </div>
+    </div>
+    </footer>
+    
+
+    <script src="assets/js/app.min.js"></script>
+  </body>
+</html>
